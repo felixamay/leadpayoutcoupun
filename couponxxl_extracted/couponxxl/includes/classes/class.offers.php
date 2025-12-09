@@ -187,7 +187,6 @@ if ( ! function_exists( 'couponxxl_get_the_expire_time' ) ) {
 		$remaining    = '';
 		$offer_expire = isset( $post->offer_expire ) ? $post->offer_expire : '';
 		$id           = isset( $post->ID ) ? $post->ID : 0;
-        return date('m/d/Y', $offer_expire);
 
 		if ( ! empty( $offer_expire ) && $offer_expire !== '99999999999' ) {
 			$diff = $offer_expire - current_time( 'timestamp' );
@@ -306,7 +305,7 @@ if ( ! function_exists( 'couponxxl_calculate_seller_part' ) ) {
 		$deal_type       = get_post_meta( $post_id, 'deal_type', true );
 
 		$deal_seller_share = 0;
-		if ( $deal_type = 'shared' ) {
+		if ( $deal_type == 'shared' ) {
 			$deal_seller_share = $deal_sale_price - $owner_share;
 		}
 

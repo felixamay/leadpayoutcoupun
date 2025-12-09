@@ -1464,7 +1464,8 @@ if ( ! function_exists( 'couponxxl_check_for_deal_items' ) ) {
 		}
 
 		if ( ! empty( $_POST['offer_type'] ) ) {
-			$offer_type = is_array( $_POST['offer_type'] ) ? array_shift( $_POST['offer_type'] ) : $_POST['offer_type'];
+			$raw_offer_type = is_array( $_POST['offer_type'] ) ? array_shift( $_POST['offer_type'] ) : $_POST['offer_type'];
+			$offer_type = sanitize_text_field( wp_unslash( $raw_offer_type ) );
 			if ( $offer_type == 'coupon' ) {
 				couponxxl_update_post_meta( '1', 'offer_has_items', $post_id );
 			} else if ( $offer_type == 'deal' ) {
@@ -2410,7 +2411,7 @@ Send subscription
 */
 if ( ! function_exists( 'couponxxl_send_subscription' ) ) {
 	function couponxxl_send_subscription( $email = '' ) {
-		$email    = ! empty( $email ) ? $email : $_POST["email"];
+		$email    = ! empty( $email ) ? sanitize_email( $email ) : ( isset( $_POST["email"] ) ? sanitize_email( wp_unslash( $_POST["email"] ) ) : '' );
 		$response = array();
 		if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
 			require_once( couponxxl_load_path( 'includes/classes/class.mailchimp.php' ) );
@@ -2438,7 +2439,7 @@ if ( ! function_exists( 'couponxxl_send_subscription' ) ) {
 			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'Email is empty or invalid.', 'couponxxl' ) . '</div>';
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
@@ -2816,14 +2817,15 @@ AJAX Search by on type
 if ( ! function_exists( 'couponxxl_items_dropdown' ) ) {
 	function couponxxl_items_dropdown() {
 		global $wpdb;
-		$value         = mb_strtolower( esc_sql( $_POST['val'] ) );
+		$value         = isset( $_POST['val'] ) ? sanitize_text_field( wp_unslash( $_POST['val'] ) ) : '';
+		$value         = mb_strtolower( $value );
 		$preg_callback = function ( $matches ) {
-			return '<strong>' . $matches[1] . '</strong>';
+			return '<strong>' . esc_html( $matches[1] ) . '</strong>';
 		};
 
 		$html = '<ul class="list-unstyled">';
 		if ( ! empty( $value ) ) {
-			$items = $wpdb->get_results( $wpdb->prepare( "SELECT posts.ID, posts.post_title, posts.post_type, offers.offer_type, offers.offer_expire FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->prefix}offers AS offers ON posts.ID = offers.post_id WHERE LOWER( posts.post_title ) LIKE %s AND ( posts.post_type = 'store' OR posts.post_type = 'offer' ) AND posts.post_status = 'publish'", '%' . $value . '%' ) );
+			$items = $wpdb->get_results( $wpdb->prepare( "SELECT posts.ID, posts.post_title, posts.post_type, offers.offer_type, offers.offer_expire FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->prefix}offers AS offers ON posts.ID = offers.post_id WHERE LOWER( posts.post_title ) LIKE %s AND ( posts.post_type = 'store' OR posts.post_type = 'offer' ) AND posts.post_status = 'publish'", '%' . $wpdb->esc_like( $value ) . '%' ) );
 			if ( ! empty( $items ) ) {
 				foreach ( $items as $item ) {
 					$expire_time = $item->offer_expire;
@@ -4212,17 +4214,25 @@ Save store details
 */
 if ( ! function_exists( 'couponxxl_save_store' ) ) {
 	function couponxxl_save_store() {
-		$store_id          = isset( $_POST['store_id'] ) ? $_POST['store_id'] : '';
-		$store_title       = isset( $_POST['store_title'] ) ? $_POST['store_title'] : '';
-		$store_description = isset( $_POST['store_description'] ) ? $_POST['store_description'] : '';
-		$store_facebook    = isset( $_POST['store_facebook'] ) ? $_POST['store_facebook'] : '';
-		$store_twitter     = isset( $_POST['store_twitter'] ) ? $_POST['store_twitter'] : '';
-		$store_link        = isset( $_POST['store_link'] ) ? $_POST['store_link'] : '';
-		$store_google      = isset( $_POST['store_google'] ) ? $_POST['store_google'] : '';
-		$store_rss         = isset( $_POST['store_rss'] ) ? $_POST['store_rss'] : '';
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			echo wp_json_encode( array( 'message' => '<div class="alert alert-danger">' . esc_html__( 'You must be logged in.', 'couponxxl' ) . '</div>' ) );
+			die();
+		}
+
+		$store_id          = isset( $_POST['store_id'] ) ? absint( $_POST['store_id'] ) : 0;
+		$store_title       = isset( $_POST['store_title'] ) ? sanitize_text_field( wp_unslash( $_POST['store_title'] ) ) : '';
+		$store_description = isset( $_POST['store_description'] ) ? wp_kses_post( wp_unslash( $_POST['store_description'] ) ) : '';
+		$store_facebook    = isset( $_POST['store_facebook'] ) ? esc_url_raw( wp_unslash( $_POST['store_facebook'] ) ) : '';
+		$store_twitter     = isset( $_POST['store_twitter'] ) ? esc_url_raw( wp_unslash( $_POST['store_twitter'] ) ) : '';
+		$store_link        = isset( $_POST['store_link'] ) ? esc_url_raw( wp_unslash( $_POST['store_link'] ) ) : '';
+		$store_google      = isset( $_POST['store_google'] ) ? esc_url_raw( wp_unslash( $_POST['store_google'] ) ) : '';
+		$store_rss         = isset( $_POST['store_rss'] ) ? esc_url_raw( wp_unslash( $_POST['store_rss'] ) ) : '';
 		$store             = get_post( $store_id );
 		$response          = array();
-		if ( ! empty( $store ) && ! empty( $store_title ) ) {
+
+		// Verify user owns this store or is admin
+		if ( ! empty( $store ) && ( $store->post_author == get_current_user_id() || current_user_can( 'manage_options' ) ) && ! empty( $store_title ) ) {
 			wp_update_post( array(
 				'ID'           => $store_id,
 				'post_title'   => $store_title,
@@ -4232,21 +4242,19 @@ if ( ! function_exists( 'couponxxl_save_store' ) ) {
 
 			update_post_meta( $store_id, 'store_facebook', $store_facebook );
 			update_post_meta( $store_id, 'store_twitter', $store_twitter );
-			update_post_meta( $store_id, 'store_facebook', $store_facebook );
 			update_post_meta( $store_id, 'store_google', $store_google );
 			update_post_meta( $store_id, 'store_rss', $store_rss );
 			update_post_meta( $store_id, 'store_link', $store_link );
 
 			$response['message'] = '<div class="alert alert-success">' . esc_html__( 'Store details are updated', 'couponxxl' ) . '</div>';
 		} else {
-			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'Store title can not be empty', 'couponxxl' ) . '</div>';
+			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'Store title can not be empty or you do not have permission.', 'couponxxl' ) . '</div>';
 		}
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
 	add_action( 'wp_ajax_update_store', 'couponxxl_save_store' );
-	add_action( 'wp_ajax_nopriv_update_store', 'couponxxl_save_store' );
 }
 
 /*
@@ -4254,10 +4262,17 @@ Save store logo
 */
 if ( ! function_exists( 'couponxxl_save_store_logo' ) ) {
 	function couponxxl_save_store_logo() {
-		$store_id = isset( $_POST['store_id'] ) ? $_POST['store_id'] : '';
-		$image_id = isset( $_POST['image_id'] ) ? $_POST['image_id'] : '';
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			die();
+		}
+
+		$store_id = isset( $_POST['store_id'] ) ? absint( $_POST['store_id'] ) : 0;
+		$image_id = isset( $_POST['image_id'] ) ? absint( $_POST['image_id'] ) : 0;
 		$store    = get_post( $store_id );
-		if ( ! empty( $store ) && ! empty( $image_id ) ) {
+
+		// Verify user owns this store or is admin
+		if ( ! empty( $store ) && ! empty( $image_id ) && ( $store->post_author == get_current_user_id() || current_user_can( 'manage_options' ) ) ) {
 			set_post_thumbnail( $store_id, $image_id );
 			echo wp_get_attachment_image( $image_id, 'thumbnail' );
 		}
@@ -4265,7 +4280,6 @@ if ( ! function_exists( 'couponxxl_save_store_logo' ) ) {
 	}
 
 	add_action( 'wp_ajax_update_store_logo', 'couponxxl_save_store_logo' );
-	add_action( 'wp_ajax_nopriv_update_store_logo', 'couponxxl_save_store_logo' );
 }
 
 /*
@@ -4273,8 +4287,15 @@ Verify if voucher exists and if it is not used
 */
 if ( ! function_exists( 'couponxxl_verify_voucher' ) ) {
 	function couponxxl_verify_voucher( $voucher_id = '' ) {
-		$voucher_code = isset( $_POST['voucher_code'] ) ? $_POST['voucher_code'] : '';
-		$vendor_id    = isset( $_POST['vendor_id'] ) ? $_POST['vendor_id'] : '';
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			echo wp_json_encode( array( 'message' => '<div class="alert alert-danger">' . esc_html__( 'You must be logged in.', 'couponxxl' ) . '</div>' ) );
+			die();
+		}
+
+		$voucher_code = isset( $_POST['voucher_code'] ) ? sanitize_text_field( wp_unslash( $_POST['voucher_code'] ) ) : '';
+		$vendor_id    = isset( $_POST['vendor_id'] ) ? absint( $_POST['vendor_id'] ) : 0;
+		$voucher_id   = ! empty( $voucher_id ) ? absint( $voucher_id ) : 0;
 		$response     = array();
 		if ( ! empty( $voucher_code ) || ! empty( $voucher_id ) ) {
 			global $wpdb;
@@ -4304,11 +4325,11 @@ if ( ! function_exists( 'couponxxl_verify_voucher' ) ) {
 					</tr>
 					<tr>
 						<td>
-							' . $voucher->voucher_code . '
+							' . esc_html( $voucher->voucher_code ) . '
 						</td>
 						<td>
-							<a href="' . get_permalink( $voucher->offer_id ) . '" target="_blank">
-								' . $voucher->offer_title . '
+							<a href="' . esc_url( get_permalink( $voucher->offer_id ) ) . '" target="_blank">
+								' . esc_html( $voucher->offer_title ) . '
 							</a>
 						</td>
 						<td>
@@ -4318,7 +4339,7 @@ if ( ! function_exists( 'couponxxl_verify_voucher' ) ) {
 							<a href="javascript:;" class="update-voucher" data-voucher_id="' . esc_attr( $voucher->voucher_id ) . '" data-status="' . ( $voucher->voucher_status == '1' ? esc_attr( '0' ) : esc_attr( '1' ) ) . '" title="' . ( $voucher->voucher_status == '1' ? esc_attr__( 'Mark voucher as not used', 'couponxxl' ) : esc_attr__( 'Mark voucher as used', 'couponxxl' ) ) . '">' . ( $voucher->voucher_status == '1' ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>' ) . '</a>
 						</td>
 					</tr>
-				<table>
+				</table>
 			</div>
 			';
 			} else {
@@ -4328,12 +4349,11 @@ if ( ! function_exists( 'couponxxl_verify_voucher' ) ) {
 			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'Voucher code is required', 'couponxxl' ) . '</div>';
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
 	add_action( 'wp_ajax_verify_voucher', 'couponxxl_verify_voucher' );
-	add_action( 'wp_ajax_nopriv_verify_voucher', 'couponxxl_verify_voucher' );
 }
 
 /*
@@ -4341,12 +4361,16 @@ Update voucher status and return table again
 */
 if ( ! function_exists( 'couponxxl_update_voucher_from_form' ) ) {
 	function couponxxl_update_voucher_from_form() {
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			die();
+		}
 		couponxxl_update_voucher( false );
-		couponxxl_verify_voucher( $_POST['voucher_id'] );
+		$voucher_id = isset( $_POST['voucher_id'] ) ? absint( $_POST['voucher_id'] ) : 0;
+		couponxxl_verify_voucher( $voucher_id );
 	}
 
 	add_action( 'wp_ajax_update_voucher_from_form', 'couponxxl_update_voucher_from_form' );
-	add_action( 'wp_ajax_nopriv_update_voucher_from_form', 'couponxxl_update_voucher_from_form' );
 }
 
 /*
@@ -4386,14 +4410,28 @@ if ( ! function_exists( 'couponxxl_get_vendor_id' ) ) {
 
 if ( ! function_exists( 'couponxxl_edit_agent' ) ) {
 	function couponxxl_edit_agent() {
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			echo wp_json_encode( array( 'message' => '<div class="alert alert-danger">' . esc_html__( 'You must be logged in.', 'couponxxl' ) . '</div>' ) );
+			die();
+		}
+
 		$response        = array();
-		$agent_id        = isset( $_POST['agent_id'] ) ? $_POST['agent_id'] : '';
-		$agent_email     = isset( $_POST['agent_email'] ) ? $_POST['agent_email'] : '';
-		$password        = isset( $_POST['password'] ) ? $_POST['password'] : '';
-		$repeat_password = isset( $_POST['repeat_password'] ) ? $_POST['repeat_password'] : '';
+		$agent_id        = isset( $_POST['agent_id'] ) ? absint( $_POST['agent_id'] ) : 0;
+		$agent_email     = isset( $_POST['agent_email'] ) ? sanitize_email( wp_unslash( $_POST['agent_email'] ) ) : '';
+		$password        = isset( $_POST['password'] ) ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : '';
+		$repeat_password = isset( $_POST['repeat_password'] ) ? sanitize_text_field( wp_unslash( $_POST['repeat_password'] ) ) : '';
 
 		$user = get_user_by( 'id', $agent_id );
 		if ( ! empty( $user ) ) {
+			// Verify current user can edit this agent
+			$current_user = get_current_user_id();
+			$agent_parent = get_user_meta( $agent_id, 'agent_parent', true );
+			if ( $agent_parent != $current_user && ! current_user_can( 'manage_options' ) ) {
+				echo wp_json_encode( array( 'message' => '<div class="alert alert-danger">' . esc_html__( 'You do not have permission to edit this agent.', 'couponxxl' ) . '</div>' ) );
+				die();
+			}
+
 			$user    = $user->data;
 			$proceed = true;
 			if ( $user->user_email !== $agent_email ) {
@@ -4423,12 +4461,11 @@ if ( ! function_exists( 'couponxxl_edit_agent' ) ) {
 			}
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
 	add_action( 'wp_ajax_edit_agent', 'couponxxl_edit_agent' );
-	add_action( 'wp_ajax_nopriv_edit_agent', 'couponxxl_edit_agent' );
 }
 
 /*
@@ -4502,6 +4539,11 @@ Export custom data values
 */
 if ( ! function_exists( 'couponxxl_export_cd_values' ) ) {
 	function couponxxl_export_cd_values() {
+		// Security check
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		global $wpdb;
 		$tables = array(
 			'offers',
@@ -4513,13 +4555,20 @@ if ( ! function_exists( 'couponxxl_export_cd_values' ) ) {
 		$exp_data = array();
 
 		foreach ( $tables as $table ) {
-			$table_data = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}" . esc_sql( $table ) . "", ARRAY_A );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$table_data = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}%s", $table ), ARRAY_A );
+			// Fallback if prepared statement fails with table names
+			if ( empty( $table_data ) ) {
+				$safe_table = esc_sql( $table );
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				$table_data = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}{$safe_table}", ARRAY_A );
+			}
 			if ( ! empty( $table_data ) ) {
 				$exp_data[ $table ] = $table_data;
 			}
 		}
 
-		echo '<textarea class="cd-import">' . json_encode( $exp_data ) . '</textarea>';
+		echo '<textarea class="cd-import">' . wp_json_encode( $exp_data ) . '</textarea>';
 	}
 }
 
@@ -4535,35 +4584,72 @@ if ( ! function_exists( 'couponxxl_shortcode_style' ) ) {
 }
 
 /*
-Import cutsom data values
+Import custom data values
 */
 if ( ! function_exists( 'couponxxl_import_cd_values' ) ) {
 	function couponxxl_import_cd_values() {
 		global $wpdb;
-		$tables = array(
+
+		// Security checks
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$allowed_tables = array(
 			'offers'        => array( '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%f', '%d' ),
 			'order_items'   => array( '%d', '%d', '%s', '%s', '%s', '%s' ),
 			'store_markers' => array( '%d', '%d', '%s', '%d', '%d', '%d', '%s', '%f', '%f', '%d', '%s' ),
 			'vouchers'      => array( '%d', '%d', '%d', '%s' )
 		);
+
 		if ( ! empty( $_POST['cxxl_custom_data'] ) ) {
-			$cxxl_custom_data = json_decode( stripslashes( $_POST['cxxl_custom_data'] ), true );
-			if ( json_last_error() > 0 ) {
-				$cxxl_custom_data = json_decode( $_POST['cxxl_custom_data'], true );
+			// Verify nonce
+			if ( ! isset( $_POST['cd_import_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['cd_import_nonce'] ) ), 'couponxxl_cd_import' ) ) {
+				?>
+				<div class="error notice notice-error is-dismissible">
+					<p><?php esc_html_e( 'Security check failed. Please try again.', 'couponxxl' ) ?></p>
+				</div>
+				<?php
+				return;
 			}
-			if ( ! empty( $cxxl_custom_data ) ) {
+
+			$raw_data = wp_unslash( $_POST['cxxl_custom_data'] );
+			$cxxl_custom_data = json_decode( stripslashes( $raw_data ), true );
+			if ( json_last_error() > 0 ) {
+				$cxxl_custom_data = json_decode( $raw_data, true );
+			}
+
+			if ( ! empty( $cxxl_custom_data ) && is_array( $cxxl_custom_data ) ) {
+				$imported = 0;
 				foreach ( $cxxl_custom_data as $table => $data ) {
-					foreach ( $data as $row ) {
-						$info = $wpdb->insert( $wpdb->prefix . $table, $row, $tables[ $table ] );
+					// Validate table name against whitelist
+					if ( ! array_key_exists( $table, $allowed_tables ) ) {
+						continue;
+					}
+					if ( is_array( $data ) ) {
+						foreach ( $data as $row ) {
+							if ( is_array( $row ) ) {
+								$info = $wpdb->insert( $wpdb->prefix . $table, $row, $allowed_tables[ $table ] );
+								if ( $info ) {
+									$imported++;
+								}
+							}
+						}
 					}
 				}
 				?>
                 <div class="updated notice notice-success is-dismissible">
-                    <p><?php esc_html_e( 'Import process finished', 'couponxxl' ) ?></p>
+                    <p><?php printf( esc_html__( 'Import process finished. %d records imported.', 'couponxxl' ), $imported ); ?></p>
                     <button type="button" class="notice-dismiss"><span
                                 class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'couponxxl' ) ?></span>
                     </button>
                 </div>
+				<?php
+			} else {
+				?>
+				<div class="error notice notice-error is-dismissible">
+					<p><?php esc_html_e( 'Invalid JSON data provided.', 'couponxxl' ) ?></p>
+				</div>
 				<?php
 			}
 		}

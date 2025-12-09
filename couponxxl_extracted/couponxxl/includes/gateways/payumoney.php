@@ -69,18 +69,30 @@ class CouponXXL_PayUMoney {
 	}
 
 	public function process_additional() {
+		// Security check
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
 		$buyer_id            = get_current_user_id();
-		$payumoney_transient = $_POST['payumoney_transient'];
+		$payumoney_transient = isset( $_POST['payumoney_transient'] ) ? sanitize_text_field( wp_unslash( $_POST['payumoney_transient'] ) ) : '';
 		$transient_data      = maybe_unserialize( get_transient( $payumoney_transient ) );
 		if ( ! empty( $transient_data ) ) {
-			extract( $transient_data );
+			$amount = isset( $transient_data['amount'] ) ? $transient_data['amount'] : 0;
+			$title = isset( $transient_data['title'] ) ? $transient_data['title'] : '';
+			$desc = isset( $transient_data['desc'] ) ? $transient_data['desc'] : '';
+			$main_unit_abbr = isset( $transient_data['main_unit_abbr'] ) ? $transient_data['main_unit_abbr'] : '';
+			$permalink = isset( $transient_data['permalink'] ) ? $transient_data['permalink'] : '';
+			$transient = isset( $transient_data['transient'] ) ? $transient_data['transient'] : '';
+			$first_name = isset( $transient_data['first_name'] ) ? $transient_data['first_name'] : '';
+			$phone_number = isset( $transient_data['phone_number'] ) ? $transient_data['phone_number'] : '';
 
 			if ( isset( $_POST['payumoney_name'] ) ) {
-				$first_name = $_POST['payumoney_name'];
+				$first_name = sanitize_text_field( wp_unslash( $_POST['payumoney_name'] ) );
 				update_user_meta( $buyer_id, 'first_name', $first_name );
 			}
 			if ( isset( $_POST['payumoney_phone'] ) ) {
-				$phone_number = $_POST['payumoney_phone'];
+				$phone_number = sanitize_text_field( wp_unslash( $_POST['payumoney_phone'] ) );
 				update_user_meta( $buyer_id, 'phone_number', $phone_number );
 			}
 
@@ -211,16 +223,17 @@ class CouponXXL_PayUMoney {
 
 	public function process_response( $gateway ) {
 		if ( $gateway == $this->slug ) {
-			$status      = $_POST["status"];
-			$firstname   = $_POST["firstname"];
-			$amount      = $_POST["amount"];
-			$txnid       = $_POST["txnid"];
-			$posted_hash = $_POST["hash"];
-			$key         = $_POST["key"];
-			$productinfo = $_POST["productinfo"];
-			$email       = $_POST["email"];
+			// Sanitize POST data from PayUMoney callback
+			$status      = isset( $_POST["status"] ) ? sanitize_text_field( wp_unslash( $_POST["status"] ) ) : '';
+			$firstname   = isset( $_POST["firstname"] ) ? sanitize_text_field( wp_unslash( $_POST["firstname"] ) ) : '';
+			$amount      = isset( $_POST["amount"] ) ? floatval( $_POST["amount"] ) : 0;
+			$txnid       = isset( $_POST["txnid"] ) ? sanitize_text_field( wp_unslash( $_POST["txnid"] ) ) : '';
+			$posted_hash = isset( $_POST["hash"] ) ? sanitize_text_field( wp_unslash( $_POST["hash"] ) ) : '';
+			$key         = isset( $_POST["key"] ) ? sanitize_text_field( wp_unslash( $_POST["key"] ) ) : '';
+			$productinfo = isset( $_POST["productinfo"] ) ? sanitize_text_field( wp_unslash( $_POST["productinfo"] ) ) : '';
+			$email       = isset( $_POST["email"] ) ? sanitize_email( wp_unslash( $_POST["email"] ) ) : '';
 			$salt        = couponxxl_get_option( 'payumoney_merchant_salt' );
-			$transient   = $_GET["transient"];
+			$transient   = isset( $_GET["transient"] ) ? sanitize_text_field( wp_unslash( $_GET["transient"] ) ) : '';
 
 			$transient_data = maybe_unserialize( get_transient( $transient ) );
 

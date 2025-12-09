@@ -2,40 +2,52 @@
 if ( ! function_exists( 'couponxxl_insert_offer' ) ) {
 	function couponxxl_insert_offer() {
 		$all_checks_passed = false;
-		/* END IF WE ARE RETURNING FROM THE PAYPAL */
+		$message = '';
 
-		$edit     = isset( $_POST['offer_id'] ) ? true : false;
-		$offer_id = $edit ? $_POST['offer_id'] : 0;
+		// Security check - user must be logged in
+		if ( ! is_user_logged_in() ) {
+			echo '<div class="alert alert-danger">' . esc_html__( 'You must be logged in to submit offers.', 'couponxxl' ) . '</div>';
+			die();
+		}
 
-		$vendor_id = isset( $_POST['vendor_id'] ) ? $_POST['vendor_id'] : '';
+		$edit     = isset( $_POST['offer_id'] ) && ! empty( $_POST['offer_id'] ) ? true : false;
+		$offer_id = $edit ? absint( $_POST['offer_id'] ) : 0;
 
-		$offer_type           = isset( $_POST['offer_type'] ) ? $_POST['offer_type'] : '';
-		$offer_title          = isset( $_POST['offer_title'] ) ? $_POST['offer_title'] : '';
-		$offer_description    = isset( $_POST['offer_description'] ) ? $_POST['offer_description'] : '';
-		$offer_featured_image = isset( $_POST['offer_featured_image'] ) ? $_POST['offer_featured_image'] : '';
-		$offer_store          = isset( $_POST['offer_store'] ) ? $_POST['offer_store'] : '';
-		$offer_cat            = isset( $_POST['offer_cat'] ) ? $_POST['offer_cat'] : '';
-		$offer_new_category   = isset( $_POST['offer_new_category'] ) ? $_POST['offer_new_category'] : '';
-		$offer_start          = isset( $_POST['offer_start'] ) ? strtotime( $_POST['offer_start'] ) : current_time( 'timestamp' );
-		$offer_expire         = isset( $_POST['offer_expire'] ) ? strtotime( $_POST['offer_expire'] ) : '';
+		$vendor_id = isset( $_POST['vendor_id'] ) ? absint( $_POST['vendor_id'] ) : get_current_user_id();
+
+		// Verify the vendor_id matches current user or user is admin
+		if ( $vendor_id !== get_current_user_id() && ! current_user_can( 'manage_options' ) ) {
+			echo '<div class="alert alert-danger">' . esc_html__( 'You do not have permission to perform this action.', 'couponxxl' ) . '</div>';
+			die();
+		}
+
+		$offer_type           = isset( $_POST['offer_type'] ) ? sanitize_text_field( wp_unslash( $_POST['offer_type'] ) ) : '';
+		$offer_title          = isset( $_POST['offer_title'] ) ? sanitize_text_field( wp_unslash( $_POST['offer_title'] ) ) : '';
+		$offer_description    = isset( $_POST['offer_description'] ) ? wp_kses_post( wp_unslash( $_POST['offer_description'] ) ) : '';
+		$offer_featured_image = isset( $_POST['offer_featured_image'] ) ? absint( $_POST['offer_featured_image'] ) : 0;
+		$offer_store          = isset( $_POST['offer_store'] ) ? absint( $_POST['offer_store'] ) : 0;
+		$offer_cat            = isset( $_POST['offer_cat'] ) ? absint( $_POST['offer_cat'] ) : 0;
+		$offer_new_category   = isset( $_POST['offer_new_category'] ) ? sanitize_text_field( wp_unslash( $_POST['offer_new_category'] ) ) : '';
+		$offer_start          = isset( $_POST['offer_start'] ) && ! empty( $_POST['offer_start'] ) ? strtotime( sanitize_text_field( wp_unslash( $_POST['offer_start'] ) ) ) : current_time( 'timestamp' );
+		$offer_expire         = isset( $_POST['offer_expire'] ) && ! empty( $_POST['offer_expire'] ) ? strtotime( sanitize_text_field( wp_unslash( $_POST['offer_expire'] ) ) ) : '';
 		/*COUPON RELATED */
-		$coupon_excerpt = isset( $_POST['coupon_excerpt'] ) ? $_POST['coupon_excerpt'] : '';
-		$coupon_type    = isset( $_POST['coupon_type'] ) ? $_POST['coupon_type'] : '';
-		$coupon_code    = isset( $_POST['coupon_code'] ) ? $_POST['coupon_code'] : '';
-		$coupon_sale    = isset( $_POST['coupon_sale'] ) ? $_POST['coupon_sale'] : '';
-		$coupon_image   = isset( $_POST['coupon_image'] ) ? $_POST['coupon_image'] : '';
-		$coupon_link    = isset( $_POST['coupon_link'] ) ? $_POST['coupon_link'] : '';
-		/*DEAL REALTED*/
-		$deal_link           = isset( $_POST['deal_link'] ) ? $_POST['deal_link'] : '';
-		$deal_items          = isset( $_POST['deal_items'] ) ? $_POST['deal_items'] : '';
-		$deal_item_vouchers  = isset( $_POST['deal_item_vouchers'] ) ? $_POST['deal_item_vouchers'] : '';
-		$deal_price          = isset( $_POST['deal_price'] ) ? $_POST['deal_price'] : '';
-		$deal_sale_price     = isset( $_POST['deal_sale_price'] ) ? $_POST['deal_sale_price'] : '';
-		$deal_min_sales      = isset( $_POST['deal_min_sales'] ) ? $_POST['deal_min_sales'] : '';
-		$deal_voucher_expire = isset( $_POST['deal_voucher_expire'] ) ? strtotime( $_POST['deal_voucher_expire'] ) : '';
-		$deal_excerpt        = isset( $_POST['deal_excerpt'] ) ? $_POST['deal_excerpt'] : '';
-		$deal_images         = isset( $_POST['deal_images'] ) ? $_POST['deal_images'] : '';
-		$deal_type           = isset( $_POST['deal_type'] ) ? $_POST['deal_type'] : '';
+		$coupon_excerpt = isset( $_POST['coupon_excerpt'] ) ? sanitize_textarea_field( wp_unslash( $_POST['coupon_excerpt'] ) ) : '';
+		$coupon_type    = isset( $_POST['coupon_type'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_type'] ) ) : '';
+		$coupon_code    = isset( $_POST['coupon_code'] ) ? sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) ) : '';
+		$coupon_sale    = isset( $_POST['coupon_sale'] ) ? esc_url_raw( wp_unslash( $_POST['coupon_sale'] ) ) : '';
+		$coupon_image   = isset( $_POST['coupon_image'] ) ? absint( $_POST['coupon_image'] ) : 0;
+		$coupon_link    = isset( $_POST['coupon_link'] ) ? esc_url_raw( wp_unslash( $_POST['coupon_link'] ) ) : '';
+		/*DEAL RELATED*/
+		$deal_link           = isset( $_POST['deal_link'] ) ? esc_url_raw( wp_unslash( $_POST['deal_link'] ) ) : '';
+		$deal_items          = isset( $_POST['deal_items'] ) ? absint( $_POST['deal_items'] ) : 0;
+		$deal_item_vouchers  = isset( $_POST['deal_item_vouchers'] ) ? sanitize_textarea_field( wp_unslash( $_POST['deal_item_vouchers'] ) ) : '';
+		$deal_price          = isset( $_POST['deal_price'] ) ? floatval( $_POST['deal_price'] ) : 0;
+		$deal_sale_price     = isset( $_POST['deal_sale_price'] ) ? floatval( $_POST['deal_sale_price'] ) : 0;
+		$deal_min_sales      = isset( $_POST['deal_min_sales'] ) ? absint( $_POST['deal_min_sales'] ) : 0;
+		$deal_voucher_expire = isset( $_POST['deal_voucher_expire'] ) && ! empty( $_POST['deal_voucher_expire'] ) ? strtotime( sanitize_text_field( wp_unslash( $_POST['deal_voucher_expire'] ) ) ) : '';
+		$deal_excerpt        = isset( $_POST['deal_excerpt'] ) ? sanitize_textarea_field( wp_unslash( $_POST['deal_excerpt'] ) ) : '';
+		$deal_images         = isset( $_POST['deal_images'] ) ? sanitize_text_field( wp_unslash( $_POST['deal_images'] ) ) : '';
+		$deal_type           = isset( $_POST['deal_type'] ) ? sanitize_text_field( wp_unslash( $_POST['deal_type'] ) ) : '';
 
 		$date_ranges      = couponxxl_get_option( 'date_ranges' );
 		$unlimited_expire = couponxxl_get_option( 'unlimited_expire' );
@@ -59,7 +71,7 @@ if ( ! function_exists( 'couponxxl_insert_offer' ) ) {
 										}
 									}
 
-									if ( $check_ranges = true ) {
+									if ( $check_ranges == true ) {
 										if ( empty( $offer_expire ) && ! $edit ) {
 											$offer_expire = '99999999999';
 										}

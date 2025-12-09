@@ -4,10 +4,12 @@
 
 
 	<p><?php esc_html_e( 'Click button bellow to get JSON export of your created fields which you can later import back using form bellow', 'couponxxl' ) ?></p>
-	<?php $permalink = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>
+	<?php 
+	$permalink = esc_url_raw( ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+	?>
 	<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'export' ), $permalink ) ) ?>" class="button"><?php esc_html_e( 'Export', 'couponxxl' ) ?></a>
 	<?php
-	if( isset( $_GET['action'] ) && $_GET['action'] == 'export' ){
+	if( isset( $_GET['action'] ) && sanitize_text_field( wp_unslash( $_GET['action'] ) ) === 'export' ){
 		couponxxl_export_cd_values();
 	}
 	?>
@@ -18,6 +20,7 @@
 	<p><?php esc_html_e( 'Paste JSON of your custom data and click on import button', 'couponxxl' ) ?></p>
 	<?php couponxxl_import_cd_values() ?>
 	<form method="post" action="<?php echo esc_url( add_query_arg( array( 'action' => 'cd_import' ), $permalink ) ) ?>">
+		<?php wp_nonce_field( 'couponxxl_cd_import', 'cd_import_nonce' ); ?>
 		<textarea name="cxxl_custom_data" class="cd-import"></textarea>
 		<input type="submit" class="button" value="<?php esc_attr_e( 'Import', 'couponxxl' ) ?>">
 	</form>

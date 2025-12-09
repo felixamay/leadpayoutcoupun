@@ -100,7 +100,13 @@ class CouponXXL_iDEAL{
     }
 
     public function fetch_bank_url(){
-        $bank_id = $_POST['bank_id'];
+        // Security check
+        if ( ! is_user_logged_in() ) {
+            echo '<div class="alert alert-danger">' . esc_html__( 'You must be logged in.', 'couponxxl' ) . '</div>';
+            die();
+        }
+
+        $bank_id = isset( $_POST['bank_id'] ) ? sanitize_text_field( wp_unslash( $_POST['bank_id'] ) ) : '';
 
         $transient_data = maybe_unserialize( get_transient( 'cxxl_ideal_transient_'.get_current_user_id() ) );
 
@@ -129,8 +135,9 @@ class CouponXXL_iDEAL{
 
     public function process_response( $gateway ){
         if( $gateway == $this->slug ){
-            if( !empty( $_GET['return'] ) ){
-                $transient = $_GET['transient'];
+            $return = isset( $_GET['return'] ) ? sanitize_text_field( wp_unslash( $_GET['return'] ) ) : '';
+            if( !empty( $return ) ){
+                $transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
                 $transient_data = maybe_unserialize( get_transient( $transient ) );
                 if( !empty( $transient_data ) ){
                     if( $transient_data['purchase'] == 'order' ){
@@ -150,8 +157,9 @@ class CouponXXL_iDEAL{
     }
 
     public function verify_ideal( $gateway ){
-        if( $gateway == $this->slug && !empty( $_GET['status'] ) ){
-            $transient = $_GET['transient'];
+        $status = isset( $_GET['status'] ) ? sanitize_text_field( wp_unslash( $_GET['status'] ) ) : '';
+        if( $gateway == $this->slug && !empty( $status ) ){
+            $transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
             $transient_data = maybe_unserialize( get_transient( $transient ) );
             if( !empty( $transient_data ) ){
                 $mollie_id = couponxxl_get_option( 'mollie_id' );
@@ -159,7 +167,8 @@ class CouponXXL_iDEAL{
                 if( couponxxl_get_option( 'ideal_mode' ) == 'test' ){
                     $iDEAL->setTestmode(true);
                 }
-                $iDEAL->checkPayment($_GET['transaction_id']);
+                $transaction_id = isset( $_GET['transaction_id'] ) ? sanitize_text_field( wp_unslash( $_GET['transaction_id'] ) ) : '';
+                $iDEAL->checkPayment( $transaction_id );
                 if ( $iDEAL->getPaidStatus() ){
                     couponxxl_process_payment_details( $transient, $transient_data );
                 }

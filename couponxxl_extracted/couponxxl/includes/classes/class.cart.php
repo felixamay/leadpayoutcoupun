@@ -69,7 +69,8 @@ class CouponXXL_Cart {
 	}
 
 	public function update_cart() {
-		switch ( $_POST['cart_action'] ) {
+		$cart_action = isset( $_POST['cart_action'] ) ? sanitize_text_field( wp_unslash( $_POST['cart_action'] ) ) : '';
+		switch ( $cart_action ) {
 			case 'delete':
 				$this->delete_product_ids();
 				break;
@@ -86,22 +87,26 @@ class CouponXXL_Cart {
 
 		$this->_set_product_ids();
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
 	public function update_product_ids() {
 		if ( ! empty( $_POST['items'] ) ) {
+			$items = array_map( 'absint', $_POST['items'] );
 			if ( ! empty( $_POST['cart'] ) ) {
 				$this->product_ids = array();
-				if ( ! empty( $_POST['items'] ) ) {
-					foreach ( $_POST['items'] as $offer_id ) {
-						$this->product_ids[ $offer_id ] = $_POST[ 'qty_' . $offer_id ];
+				if ( ! empty( $items ) ) {
+					foreach ( $items as $offer_id ) {
+						$offer_id = absint( $offer_id );
+						$qty_key = 'qty_' . $offer_id;
+						$qty = isset( $_POST[ $qty_key ] ) ? absint( $_POST[ $qty_key ] ) : 1;
+						$this->product_ids[ $offer_id ] = $qty;
 					}
 				}
 			} else {
 				$added      = false;
-				$product_id = array_shift( $_POST['items'] );
+				$product_id = absint( array_shift( $items ) );
 				if ( ! empty( $this->product_ids ) ) {
 					foreach ( $this->product_ids as $id => &$qty ) {
 						if ( $product_id == $id ) {
@@ -119,7 +124,7 @@ class CouponXXL_Cart {
 	}
 
 	public function delete_product_ids() {
-		$product_id = $_POST['product_id'];
+		$product_id = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
 		$this->unset_product( $product_id );
 
 	}
@@ -315,18 +320,21 @@ class CouponXXL_Cart {
 					'order_id' => $order_id,
 					'title'    => $offer->post_title,
 					'amount'   => $amount,
-					'gateway'  => $_GET['gateway']
+					'gateway'  => $gateway
 				);
 				set_transient( $order_key, $transient_value );
+
+				$gateway = isset( $_GET['gateway'] ) ? sanitize_text_field( wp_unslash( $_GET['gateway'] ) ) : '';
 
 				update_post_meta( $order_id, 'order_total', $amount );
 				update_post_meta( $order_id, 'order_owner_share', $order_owner_share );
 				update_post_meta( $order_id, 'order_buyer_id', $user_id );
 				update_post_meta( $order_id, 'order_status', 'not_paid' );
-				update_post_meta( $order_id, 'order_gateway', $_GET['gateway'] );
+				update_post_meta( $order_id, 'order_gateway', $gateway );
 
 				delete_transient( $this->transient );
 				wp_redirect( add_query_arg( array( 'order_key' => $order_key ) ) );
+				exit;
 			} else {
 				echo '<div class="alert alert-danger">' . esc_html__( 'Your cart is empty.', 'couponxxl' ) . '</div>';
 			}

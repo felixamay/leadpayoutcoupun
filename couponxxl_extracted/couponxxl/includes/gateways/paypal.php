@@ -121,10 +121,13 @@ class CouponXXL_PayPal{
 		if( !empty( $pdata ) ){
 			$paypal = new PayPal( $this->get_credentials( $pdata['cancelUrl'], $pdata['returnUrl'] ) );
 
+			$token = isset( $_GET['token'] ) ? sanitize_text_field( wp_unslash( $_GET['token'] ) ) : '';
+			$payer_id = isset( $_GET['PayerID'] ) ? sanitize_text_field( wp_unslash( $_GET['PayerID'] ) ) : '';
+
 			$pdata = array_merge(
 				array(
-					'TOKEN' => $_GET['token'],
-					'PAYERID' => $_GET['PayerID'],
+					'TOKEN' => $token,
+					'PAYERID' => $payer_id,
 				),
 				$pdata
 			);
@@ -140,15 +143,17 @@ class CouponXXL_PayPal{
 
 	public function process_response( $gateway ){
 		if( $gateway == $this->slug ){
-			$transient = $_GET['transient'];
+			$transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
 			$transient_data = maybe_unserialize( get_transient( $transient ) );
-			if( !empty( $_GET['confirm'] ) ){
-	            if( !empty( $transient_data ) ){
-	            	$response = $this->do_express_checkout();
+			$confirm = isset( $_GET['confirm'] ) ? sanitize_text_field( wp_unslash( $_GET['confirm'] ) ) : '';
+			if( !empty( $confirm ) ){
+            	if( !empty( $transient_data ) ){
+            		$response = $this->do_express_checkout();
 
 					if( !isset( $response['error'] ) && !isset( $response['L_ERRORCODE0'] ) ){
 						delete_transient( 'cxxl_paypal_express_'.get_current_user_id() );
-						echo couponxxl_process_payment_details( $transient, $transient_data, array( 'transaction_id' => $response['PAYMENTINFO_0_TRANSACTIONID'], 'PayerID' => $_GET['PayerID'] ) );
+						$payer_id = isset( $_GET['PayerID'] ) ? sanitize_text_field( wp_unslash( $_GET['PayerID'] ) ) : '';
+						echo couponxxl_process_payment_details( $transient, $transient_data, array( 'transaction_id' => $response['PAYMENTINFO_0_TRANSACTIONID'], 'PayerID' => $payer_id ) );
 					}
 					else if( isset( $response['L_ERRORCODE0'] ) && $response['L_ERRORCODE0'] === '11607' ){
 						echo '<div class="alert alert-danger">'.esc_html__( 'This transaction is already processed.', 'couponxxl' ).'</div>';

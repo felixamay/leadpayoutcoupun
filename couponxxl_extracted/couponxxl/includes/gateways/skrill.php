@@ -89,8 +89,9 @@ class CouponXXL_Skrill{
     }
 
     public function process_response( $gateway ){
-        if( $gateway == $this->slug && !empty( $_GET['return'] ) ){
-            $transient = $_GET['transient'];
+        $return = isset( $_GET['return'] ) ? sanitize_text_field( wp_unslash( $_GET['return'] ) ) : '';
+        if( $gateway == $this->slug && !empty( $return ) ){
+            $transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
             $transient_data = maybe_unserialize( get_transient( $transient ) );
             if( !empty( $transient_data ) ){
                 if( $transient_data['purchase'] == 'order' ){
@@ -105,23 +106,33 @@ class CouponXXL_Skrill{
     }
 
     public function verify_skrill( $gateway ){
-        if( $gateway == $this->slug && !empty( $_GET['status'] ) ){
-            $transient = $_GET['transient'];
+        $status = isset( $_GET['status'] ) ? sanitize_text_field( wp_unslash( $_GET['status'] ) ) : '';
+        if( $gateway == $this->slug && !empty( $status ) ){
+            $transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
             $transient_data = maybe_unserialize( get_transient( $transient ) );
             if( !empty( $transient_data ) ){
-                if( isset( $_POST['merchant_id'] ) ){   
+                if( isset( $_POST['merchant_id'] ) ){
+                    // Sanitize POST data for Skrill callback
+                    $merchant_id = isset( $_POST['merchant_id'] ) ? sanitize_text_field( wp_unslash( $_POST['merchant_id'] ) ) : '';
+                    $transaction_id = isset( $_POST['transaction_id'] ) ? sanitize_text_field( wp_unslash( $_POST['transaction_id'] ) ) : '';
+                    $mb_amount = isset( $_POST['mb_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['mb_amount'] ) ) : '';
+                    $mb_currency = isset( $_POST['mb_currency'] ) ? sanitize_text_field( wp_unslash( $_POST['mb_currency'] ) ) : '';
+                    $post_status = isset( $_POST['status'] ) ? absint( $_POST['status'] ) : 0;
+                    $md5sig = isset( $_POST['md5sig'] ) ? sanitize_text_field( wp_unslash( $_POST['md5sig'] ) ) : '';
+                    $pay_to_email = isset( $_POST['pay_to_email'] ) ? sanitize_email( wp_unslash( $_POST['pay_to_email'] ) ) : '';
+
                     $skrill_secret_word = couponxxl_get_option( 'skrill_secret_word' );
-                    $concatFields = $_POST['merchant_id']
-                        .$_POST['transaction_id']
-                        .strtoupper(md5($skrill_secret_word))
-                        .$_POST['mb_amount']
-                        .$_POST['mb_currency']
-                        .$_POST['status'];
+                    $concatFields = $merchant_id
+                        . $transaction_id
+                        . strtoupper(md5($skrill_secret_word))
+                        . $mb_amount
+                        . $mb_currency
+                        . $post_status;
 
                     $MBEmail = couponxxl_get_option( 'skrill_owner_mail' );
 
-                    if ( strtoupper( md5($concatFields) ) == $_POST['md5sig'] && $_POST['status'] == 2 && $_POST['pay_to_email'] == $MBEmail ){
-                        couponxxl_process_payment_details( $transient, $transient_data, array( 'transaction_id' => $_POST['transaction_id'] ) );
+                    if ( strtoupper( md5($concatFields) ) == $md5sig && $post_status == 2 && $pay_to_email == $MBEmail ){
+                        couponxxl_process_payment_details( $transient, $transient_data, array( 'transaction_id' => $transaction_id ) );
                     }
                 }
             }

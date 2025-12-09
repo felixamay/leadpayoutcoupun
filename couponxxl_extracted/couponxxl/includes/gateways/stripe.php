@@ -85,8 +85,14 @@ class CouponXXL_Stripe{
     }
 
     public function process_payment(){
-        $transient = $_POST['transient'];
-        $token = $_POST['token'];
+        // Security check
+        if ( ! is_user_logged_in() ) {
+            echo '<div class="alert alert-danger">' . esc_html__( 'You must be logged in.', 'couponxxl' ) . '</div>';
+            die();
+        }
+
+        $transient = isset( $_POST['transient'] ) ? sanitize_text_field( wp_unslash( $_POST['transient'] ) ) : '';
+        $token = isset( $_POST['token'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['token'] ) ) : array();
         $transient_data = maybe_unserialize( get_transient( $transient ) );
         if( !empty( $transient_data ) ){
 
@@ -250,6 +256,13 @@ class CouponXXL_Stripe{
     public function register_payout_field(){
         if( isset( $_GET['scope'] ) && isset( $_GET['code'] ) ){
             global $current_user;
+            
+            // Security check
+            if ( ! is_user_logged_in() ) {
+                return;
+            }
+
+            $code = sanitize_text_field( wp_unslash( $_GET['code'] ) );
             $response = wp_remote_post( 'https://connect.stripe.com/oauth/token', array(
                 'method' => 'POST',
                 'timeout' => 45,
@@ -259,7 +272,7 @@ class CouponXXL_Stripe{
                 'headers' => array(),
                 'body' => array(
                     'client_secret' => couponxxl_get_option( 'sk_client_id' ),
-                    'code' => $_GET['code'],
+                    'code' => $code,
                     'grant_type' => 'authorization_code'
                 ),
                 'cookies' => array()

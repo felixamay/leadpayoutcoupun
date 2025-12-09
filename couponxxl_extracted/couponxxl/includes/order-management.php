@@ -18,11 +18,17 @@ if ( ! function_exists( 'couponxxl_update_item_status' ) ) {
 
 if ( ! function_exists( 'couponxxl_process_order' ) ) {
 	function couponxxl_process_order( $order_ids = array() ) {
+		// Security check - admin only
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		global $wpdb, $COUPONXXL_GATEWAYS;
 		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}order_items AS order_items LEFT JOIN {$wpdb->prefix}offers AS offers ON order_items.offer_id = offers.post_id SET order_items.status = 'deleted' WHERE offers.offer_type = 'deal' AND offers.offer_expire <= %d AND order_items.status = ''", current_time( 'timestamp' ) ) );
 		if ( ! empty( $_POST['order_id'] ) ) {
-			$order_items_payouts = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'payout' AND order_items.order_id = %d", $_POST['order_id'] ) );
-			$order_items_refunds = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'deleted' AND order_items.order_id = %d", $_POST['order_id'] ) );
+			$order_id = absint( $_POST['order_id'] );
+			$order_items_payouts = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'payout' AND order_items.order_id = %d", $order_id ) );
+			$order_items_refunds = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'deleted' AND order_items.order_id = %d", $order_id ) );
 		} else if ( ! empty( $order_ids ) ) {
 			$order_items_payouts = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'payout' AND order_id IN (" . esc_sql( join( ',', $order_ids ) ) . ")" );
 			$order_items_refunds = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}order_items AS order_items WHERE order_items.status = 'deleted' AND order_id IN (" . esc_sql( join( ',', $order_ids ) ) . ")" );
@@ -294,8 +300,16 @@ Process manual refund
 */
 if ( ! function_exists( 'couponxxl_process_manual_refund' ) ) {
 	function couponxxl_process_manual_refund() {
+		// Security check - admin only
+		if ( ! current_user_can( 'manage_options' ) ) {
+			die();
+		}
+
 		global $wpdb;
-		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}order_items set status = 'refunded' WHERE item_id = %d", $_POST['item_id'] ) );
+		$item_id = isset( $_POST['item_id'] ) ? absint( $_POST['item_id'] ) : 0;
+		if ( $item_id > 0 ) {
+			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}order_items SET status = 'refunded' WHERE item_id = %d", $item_id ) );
+		}
 		die();
 	}
 
@@ -582,9 +596,9 @@ Generate pdf of the order item
 if ( ! function_exists( 'couponxxl_generate_pdf' ) ) {
 	function couponxxl_generate_pdf() {
 		if ( isset( $_GET['print_pdf'] ) ) {
-			$item_id    = $_GET['item_id'];
-			$voucher_id = $_GET['voucher_id'];
-			$user_id    = $_GET['user_id'];
+			$item_id    = isset( $_GET['item_id'] ) ? absint( $_GET['item_id'] ) : 0;
+			$voucher_id = isset( $_GET['voucher_id'] ) ? absint( $_GET['voucher_id'] ) : 0;
+			$user_id    = isset( $_GET['user_id'] ) ? absint( $_GET['user_id'] ) : 0;
 			$access_key = get_transient( $user_id . '_access_key' );
 			if ( ! empty( $item_id ) && ! empty( $access_key ) ) {
 				global $wpdb;

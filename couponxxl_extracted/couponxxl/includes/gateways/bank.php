@@ -84,12 +84,13 @@ class CouponXXL_Bank{
     public function html( $amount, $title, $desc, $main_unit_abbr, $permalink, $transient, $gateway ){
         if( $gateway == $this->slug ){
             wp_redirect( add_query_arg( array( 'gateway' => $this->slug, 'transient' => $transient ), $permalink ) );
+            exit;
         }
     }
 
     public function process_response( $gateway ){
         if( $gateway == 'bank' ){
-            $transient = $_GET['transient'];
+            $transient = isset( $_GET['transient'] ) ? sanitize_text_field( wp_unslash( $_GET['transient'] ) ) : '';
             $transient_value = maybe_unserialize( get_transient( $transient ) );
             if( !empty( $transient_value ) ){
                 $bank_account_name = couponxxl_get_option( 'bank_account_name' );
@@ -135,7 +136,12 @@ class CouponXXL_Bank{
     }
 
     public function process_bank_credits_manually(){
-        $user_id = $_POST['user_id'];
+        // Security check - admin only
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        $user_id = isset( $_POST['user_id'] ) ? absint( $_POST['user_id'] ) : 0;
         $transient_value = get_user_meta( $user_id, 'cxxl_credits_manual', true );
 
         couponxxl_process_payment_details( '', $transient_value );
