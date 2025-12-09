@@ -11,11 +11,14 @@ global $couponxxl_cart;
 		<div class="container">
 			<div class="ajax-cart-wrap">
 				<?php
-				if ( ! empty( $_GET['action'] ) && $_GET['action'] == 'gateway-return' && ! empty( $_GET['gateway'] ) ) {
-					do_action( 'couponxxl_process_response', $_GET['gateway'] );
+				$action = ! empty( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : '';
+				$gateway = ! empty( $_GET['gateway'] ) ? sanitize_text_field( wp_unslash( $_GET['gateway'] ) ) : '';
+				
+				if ( $action === 'gateway-return' && ! empty( $gateway ) ) {
+					do_action( 'couponxxl_process_response', $gateway );
 				} else {
-					$order_key = ! empty( $_GET['order_key'] ) ? $_GET['order_key'] : '';
-					$package   = ! empty( $_GET['package'] ) ? $_GET['package'] : '';
+					$order_key = ! empty( $_GET['order_key'] ) ? sanitize_text_field( wp_unslash( $_GET['order_key'] ) ) : '';
+					$package   = ! empty( $_GET['package'] ) ? absint( $_GET['package'] ) : 0;
 					if ( empty( $package ) ) {
 						$couponxxl_cart->initiate_payment( $order_key );
 					} else {

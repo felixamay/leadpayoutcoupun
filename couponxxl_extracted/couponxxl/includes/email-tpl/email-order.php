@@ -2,7 +2,7 @@
 <html dir="<?php echo is_rtl() ? 'rtl' : 'ltr' ?>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title><?php wp_title(); ?></title>
+	<title><?php echo esc_html( get_bloginfo( 'name' ) ); ?> - <?php esc_html_e( 'Order', 'couponxxl' ); ?></title>
 </head>
 <body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="
 0">

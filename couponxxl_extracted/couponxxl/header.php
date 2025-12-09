@@ -18,7 +18,7 @@
 if ( is_front_page() || isset( $_GET['home_div'] ) ) {
 	$home_divider_section = couponxxl_get_option( 'home_divider_section' );
 	if ( isset( $_GET['home_div'] ) ) {
-		$home_divider_section = $_GET['home_div'];
+		$home_divider_section = sanitize_text_field( wp_unslash( $_GET['home_div'] ) );
 	}
 	switch ( $home_divider_section ) {
 		case 'slider' :
@@ -35,6 +35,7 @@ if ( is_front_page() || isset( $_GET['home_div'] ) ) {
 
 /* Activate hook for the Skrill and iDEAL status return */
 if ( ! empty( $_GET['gateway'] ) && ! empty( $_GET['status'] ) ) {
-	do_action( 'couponxxl_process_verify', $_GET['gateway'] );
+	$gateway = sanitize_text_field( wp_unslash( $_GET['gateway'] ) );
+	do_action( 'couponxxl_process_verify', $gateway );
 }
 ?>

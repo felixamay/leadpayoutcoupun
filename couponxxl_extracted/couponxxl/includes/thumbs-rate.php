@@ -5,12 +5,17 @@ Calculate and update thumbnails
 */
 if( !function_exists( 'couponxxl_thumb_rate' ) ){
 function couponxxl_thumb_rate(){
-	$offer_id = !empty( $_GET['offer_id'] ) ? $_GET['offer_id'] : '';
-	$value = !empty( $_GET['value'] ) ? $_GET['value'] : '';
+	$offer_id = !empty( $_GET['offer_id'] ) ? absint( $_GET['offer_id'] ) : 0;
+	$value = !empty( $_GET['value'] ) ? sanitize_text_field( wp_unslash( $_GET['value'] ) ) : '';
+	
+	if( empty( $offer_id ) ) {
+		wp_die( esc_html__( 'Invalid offer ID', 'couponxxl' ) );
+	}
+	
 	$can_thumbs = couponxxl_can_thumbs( $offer_id );
 	if( !empty( $offer_id ) && $can_thumbs === true ){
-		$offer_thumbs_up = get_post_meta( $offer_id, 'offer_thumbs_up', true );
-		$offer_thumbs_down = get_post_meta( $offer_id, 'offer_thumbs_down', true );
+		$offer_thumbs_up = absint( get_post_meta( $offer_id, 'offer_thumbs_up', true ) );
+		$offer_thumbs_down = absint( get_post_meta( $offer_id, 'offer_thumbs_down', true ) );
 		if( $value == 'up' ){
 			$offer_thumbs_up++;
 			update_post_meta( $offer_id, 'offer_thumbs_up', $offer_thumbs_up );
@@ -27,7 +32,9 @@ function couponxxl_thumb_rate(){
 
 		couponxxl_update_post_meta( $offer_thumbs_recommend, 'offer_thumbs_recommend', $offer_id );
 
-		update_post_meta( $offer_id, 'offer_thumbs_ip', $_SERVER['REMOTE_ADDR'] );
+		// Sanitize IP address
+		$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		update_post_meta( $offer_id, 'offer_thumbs_ip', $ip_address );
 
 		echo couponxxl_thumbs_html( $offer_id ).'<span>'.esc_html__( 'Thank you for your feedback', 'couponxxl' ).'</span>';
 		die();

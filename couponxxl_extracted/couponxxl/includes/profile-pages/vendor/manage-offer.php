@@ -1,19 +1,22 @@
 <?php
 $cxxl_credits = get_user_meta($vendor_id, 'cxxl_credits', true);
 $edit         = false;
-$offer_id     = isset($_GET['offer_id']) ? $_GET['offer_id'] : '';
-if ( ! isset($_GET['offer_type'])) {
+$offer_id     = isset($_GET['offer_id']) ? absint($_GET['offer_id']) : 0;
+if ( ! isset($_GET['offer_type']) && ! empty( $offer_id ) ) {
     $offer = new WP_Offers_Query(array(
         'posts_per_page' => -1,
-        'post__in'       => array($_GET['offer_id']),
+        'post__in'       => array($offer_id),
         'post_status'    => 'publish, draft',
     ));
-    $offer->the_post();
-    if ($store->ID == get_post_meta($offer_id, 'offer_store', true)) {
-        $edit = true;
+    if ( $offer->have_posts() ) {
+        $offer->the_post();
+        if ( isset( $store ) && $store->ID == get_post_meta($offer_id, 'offer_store', true)) {
+            $edit = true;
+        }
     }
+    wp_reset_postdata();
 }
-$offer_type               = $edit ? couponxxl_get_the_offer_type($offer_id) : $_GET['offer_type'];
+$offer_type               = $edit ? couponxxl_get_the_offer_type($offer_id) : ( isset($_GET['offer_type']) ? sanitize_text_field( wp_unslash( $_GET['offer_type'] ) ) : 'coupon' );
 if ($offer_type == 'coupon') {
     $offer_submit_price = couponxxl_get_option('coupon_submit_price');
     $name               = esc_html__('coupon', 'couponxxl');
@@ -199,7 +202,7 @@ if (0 == $offer_submit_price || $cxxl_credits >= $offer_submit_price || $edit):
             ?>
             <input type="hidden" name="offer_type" value="<?php echo esc_attr($offer_type); ?>">
             <?php if ($edit): ?>
-                <input type="hidden" name="offer_id" value="<?php echo esc_attr($_GET['offer_id']); ?>">
+                <input type="hidden" name="offer_id" value="<?php echo esc_attr($offer_id); ?>">
             <?php endif; ?>
             <input type="hidden" name="action" value="insert_offer">
             <input type="hidden" name="offer_store" value="<?php echo esc_attr($store->ID) ?>">

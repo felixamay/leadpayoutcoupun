@@ -43,7 +43,11 @@ function couponxxl_deal_precise_locations( $store_id, $saved_markers = array(), 
 
 if( !function_exists( 'couponxxl_offer_store_location' ) ){
 function couponxxl_offer_store_location(){
-	couponxxl_deal_precise_locations( $_GET['store_id'] );
+	$store_id = isset( $_GET['store_id'] ) ? absint( $_GET['store_id'] ) : 0;
+	if ( empty( $store_id ) ) {
+		wp_die( esc_html__( 'Invalid store ID', 'couponxxl' ) );
+	}
+	couponxxl_deal_precise_locations( $store_id );
 	die();
 }
 

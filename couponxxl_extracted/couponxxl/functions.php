@@ -334,18 +334,23 @@ Redirect to store link
 if ( ! function_exists( 'couponxxl_store_url' ) ) {
 	function couponxxl_store_url() {
 		if ( isset( $_GET['rs'] ) ) {
-			$store_link = get_post_meta( $_GET['rs'], 'store_link', true );
+			$store_id = absint( $_GET['rs'] );
+			$store_link = get_post_meta( $store_id, 'store_link', true );
 			if ( ! empty( $store_link ) ) {
-				wp_redirect( $store_link );
+				wp_redirect( esc_url( $store_link ) );
+				exit;
 			} else {
-				wp_redirect( get_permalink( $_GET['rs'] ) );
+				wp_redirect( get_permalink( $store_id ) );
+				exit;
 			}
 		}
 		/* redirect to external deal link */
 		if ( isset( $_GET['rd'] ) ) {
-			$deal_link = get_post_meta( $_GET['rd'], 'deal_link', true );
+			$deal_id = absint( $_GET['rd'] );
+			$deal_link = get_post_meta( $deal_id, 'deal_link', true );
 			if ( ! empty( $deal_link ) ) {
-				wp_redirect( $deal_link );
+				wp_redirect( esc_url( $deal_link ) );
+				exit;
 			}
 		}
 	}
@@ -408,21 +413,29 @@ if ( ! function_exists( 'couponxxl_wp_title_new' ) ) {
 		}
 
 		if ( ! empty( $_GET[ $couponxxl_slugs['keyword'] ] ) ) {
-			$title['title'] = str_replace( '_', ' ', urldecode( $_GET[ $couponxxl_slugs['keyword'] ] ) );
+			$keyword = sanitize_text_field( urldecode( wp_unslash( $_GET[ $couponxxl_slugs['keyword'] ] ) ) );
+			$title['title'] = str_replace( '_', ' ', $keyword );
 		}
 
 		if ( ! empty( $_GET[ $couponxxl_slugs['offer_store'] ] ) ) {
-			$title['title'] = get_the_title( $_GET[ $couponxxl_slugs['offer_store'] ] );
+			$store_id = absint( $_GET[ $couponxxl_slugs['offer_store'] ] );
+			$title['title'] = get_the_title( $store_id );
 		}
 
 		if ( ! empty( $_GET[ $couponxxl_slugs['location'] ] ) ) {
-			$term           = get_term_by( 'slug', $_GET[ $couponxxl_slugs['location'] ], 'location' );
-			$title['title'] = get_the_title( $term->name );
+			$location_slug = sanitize_text_field( wp_unslash( $_GET[ $couponxxl_slugs['location'] ] ) );
+			$term = get_term_by( 'slug', $location_slug, 'location' );
+			if ( $term && ! is_wp_error( $term ) ) {
+				$title['title'] = $term->name;
+			}
 		}
 
 		if ( ! empty( $_GET[ $couponxxl_slugs['offer_cat'] ] ) ) {
-			$term           = get_term_by( 'slug', $_GET[ $couponxxl_slugs['offer_cat'] ], 'offer_cat' );
-			$title['title'] = get_the_title( $term->name );
+			$cat_slug = sanitize_text_field( wp_unslash( $_GET[ $couponxxl_slugs['offer_cat'] ] ) );
+			$term = get_term_by( 'slug', $cat_slug, 'offer_cat' );
+			if ( $term && ! is_wp_error( $term ) ) {
+				$title['title'] = $term->name;
+			}
 		}
 
 		return $title;
@@ -698,16 +711,26 @@ Save profile changes from frontend
 */
 if ( ! function_exists( 'couponxxl_update_profile' ) ) {
 	function couponxxl_update_profile() {
+		// Security check - user must be logged in
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'You must be logged in to update your profile.', 'couponxxl' ) ) );
+		}
+
+		// Verify nonce if provided
+		if ( isset( $_POST['profile_nonce'] ) && ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['profile_nonce'] ) ), 'update_profile' ) ) {
+			wp_send_json_error( array( 'message' => esc_html__( 'Security check failed.', 'couponxxl' ) ) );
+		}
+
 		global $current_user;
 		$current_user    = wp_get_current_user();
-		$first_name      = isset( $_POST['first_name'] ) ? $_POST['first_name'] : '';
-		$last_name       = isset( $_POST['last_name'] ) ? $_POST['last_name'] : '';
-		$email           = isset( $_POST['email'] ) ? $_POST['email'] : '';
+		$first_name      = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
+		$last_name       = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
+		$email           = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 		$password        = isset( $_POST['password'] ) ? $_POST['password'] : '';
 		$repeat_password = isset( $_POST['repeat_password'] ) ? $_POST['repeat_password'] : '';
 
-		$seller_payout_method  = isset( $_POST['seller_payout_method'] ) ? $_POST['seller_payout_method'] : '';
-		$seller_payout_account = isset( $_POST[ 'seller_payout_account_' . $seller_payout_method ] ) ? $_POST[ 'seller_payout_account_' . $seller_payout_method ] : '';
+		$seller_payout_method  = isset( $_POST['seller_payout_method'] ) ? sanitize_text_field( wp_unslash( $_POST['seller_payout_method'] ) ) : '';
+		$seller_payout_account = isset( $_POST[ 'seller_payout_account_' . $seller_payout_method ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'seller_payout_account_' . $seller_payout_method ] ) ) : '';
 
 		if ( ! empty( $email ) ) {
 			$updated_password = '';
@@ -1113,7 +1136,7 @@ Enqueue script and styles in the backend
 */
 if ( ! function_exists( 'couponxxl_admin_resources' ) ) {
 	function couponxxl_admin_resources() {
-		global $post, $screen;;
+		global $post;
 		$screen = get_current_screen();
 		wp_enqueue_style( 'couponxxl-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
 		$protocol = is_ssl() ? 'https' : 'http';
@@ -2841,7 +2864,10 @@ generating show code button
 */
 if ( ! function_exists( 'couponxxl_show_code' ) ) {
 	function couponxxl_show_code() {
-		$offer_id = esc_sql( $_POST['offer_id'] );
+		$offer_id = isset( $_POST['offer_id'] ) ? absint( $_POST['offer_id'] ) : 0;
+		if ( empty( $offer_id ) ) {
+			wp_die( esc_html__( 'Invalid offer ID', 'couponxxl' ) );
+		}
 		couponxxl_register_click( $offer_id );
 		$offer       = get_post( $offer_id );
 		$offer_modal = '';
@@ -3051,13 +3077,31 @@ Update voucher to set it as used or not
 */
 if ( ! function_exists( 'couponxxl_update_voucher' ) ) {
 	function couponxxl_update_voucher( $die = true ) {
+		// Security check - require user to be logged in
+		if ( ! is_user_logged_in() ) {
+			if ( $die ) {
+				wp_die( esc_html__( 'You must be logged in to perform this action.', 'couponxxl' ) );
+			}
+			return;
+		}
+
 		global $wpdb;
-		$voucher = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}vouchers WHERE voucher_id = %d", $_POST['voucher_id'] ) );
+		$voucher_id = isset( $_POST['voucher_id'] ) ? absint( $_POST['voucher_id'] ) : 0;
+		$status = isset( $_POST['status'] ) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : '';
+
+		if ( empty( $voucher_id ) ) {
+			if ( $die ) {
+				wp_die( esc_html__( 'Invalid voucher ID.', 'couponxxl' ) );
+			}
+			return;
+		}
+
+		$voucher = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}vouchers WHERE voucher_id = %d", $voucher_id ) );
 
 		if ( ! empty( $voucher ) ) {
 			$voucher                 = $voucher[0];
-			$voucher->voucher_status = $_POST['status'];
-			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}vouchers SET voucher_status = %s WHERE voucher_id = %d", $_POST['status'], $_POST['voucher_id'] ) );
+			$voucher->voucher_status = $status;
+			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}vouchers SET voucher_status = %s WHERE voucher_id = %d", $status, $voucher_id ) );
 			if ( $die ) {
 				echo couponxxl_voucher_check( $voucher );
 			}
@@ -3293,9 +3337,11 @@ Login function
 if ( ! function_exists( 'couponxxl_login' ) ) {
 	function couponxxl_login() {
 		$response = array();
-		if ( wp_verify_nonce( $_POST['login_field'], 'login' ) ) {
-			$username = isset( $_POST['username'] ) ? esc_sql( $_POST['username'] ) : '';
-			$password = isset( $_POST['password'] ) ? esc_sql( $_POST['password'] ) : '';
+		$login_nonce = isset( $_POST['login_field'] ) ? sanitize_text_field( wp_unslash( $_POST['login_field'] ) ) : '';
+		
+		if ( wp_verify_nonce( $login_nonce, 'login' ) ) {
+			$username = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
+			$password = isset( $_POST['password'] ) ? $_POST['password'] : ''; // Don't sanitize passwords
 
 			$user = get_user_by( 'login', $username );
 			if ( $user ) {
@@ -3307,6 +3353,7 @@ if ( ! function_exists( 'couponxxl_login' ) ) {
 						'remember'      => isset( $_POST['remember_me'] ) ? true : false
 					), is_ssl() );
 					if ( is_wp_error( $user ) ) {
+						$message = esc_html__( 'Invalid credentials', 'couponxxl' );
 						switch ( $user->get_error_code() ) {
 							case 'invalid_username':
 								$message = esc_html__( 'Invalid username', 'couponxxl' );
@@ -3319,7 +3366,7 @@ if ( ! function_exists( 'couponxxl_login' ) ) {
 					} else {
 						$response['message'] = '<div class="alert alert-success">' . esc_html__( 'Congratulations! You will be redirected in 1 second....', 'couponxxl' ) . '</div>';
 						if ( ! empty( $_POST['redirect'] ) ) {
-							$response['url'] = $_POST['redirect'];
+							$response['url'] = esc_url_raw( wp_unslash( $_POST['redirect'] ) );
 						} else {
 							$response['url'] = esc_url( add_query_arg( array( 'c' => time() ), home_url( '/' ) ) );
 						}
@@ -3331,10 +3378,10 @@ if ( ! function_exists( 'couponxxl_login' ) ) {
 				$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'Invalid username', 'couponxxl' ) . '</div>';
 			}
 		} else {
-			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'You do not permission for your action', 'couponxxl' ) . '</div>';
+			$response['message'] = '<div class="alert alert-danger">' . esc_html__( 'You do not have permission for this action', 'couponxxl' ) . '</div>';
 		}
 
-		echo json_encode( $response );
+		echo wp_json_encode( $response );
 		die();
 	}
 
@@ -3956,17 +4003,18 @@ Register function
 */
 if ( ! function_exists( 'couponxxl_register' ) ) {
 	function couponxxl_register() {
-		$first_name      = isset( $_POST['first_name'] ) ? esc_sql( $_POST['first_name'] ) : '';
-		$last_name       = isset( $_POST['last_name'] ) ? esc_sql( $_POST['last_name'] ) : '';
-		$email           = isset( $_POST['email'] ) ? esc_sql( $_POST['email'] ) : '';
-		$username        = isset( $_POST['username'] ) ? esc_sql( $_POST['username'] ) : '';
-		$password        = isset( $_POST['password'] ) ? esc_sql( $_POST['password'] ) : '';
-		$repeat_password = isset( $_POST['repeat_password'] ) ? esc_sql( $_POST['repeat_password'] ) : '';
-		$vendor          = isset( $_POST['vendor'] ) ? esc_sql( $_POST['vendor'] ) : '';
+		$first_name      = isset( $_POST['first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['first_name'] ) ) : '';
+		$last_name       = isset( $_POST['last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['last_name'] ) ) : '';
+		$email           = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$username        = isset( $_POST['username'] ) ? sanitize_user( wp_unslash( $_POST['username'] ) ) : '';
+		$password        = isset( $_POST['password'] ) ? $_POST['password'] : ''; // Don't sanitize passwords
+		$repeat_password = isset( $_POST['repeat_password'] ) ? $_POST['repeat_password'] : ''; // Don't sanitize passwords
+		$vendor          = isset( $_POST['vendor'] ) ? sanitize_text_field( wp_unslash( $_POST['vendor'] ) ) : '';
 		$message         = '';
 
 		if ( isset( $_POST['register_field'] ) ) {
-			if ( wp_verify_nonce( $_POST['register_field'], 'register' ) ) {
+			$register_nonce = sanitize_text_field( wp_unslash( $_POST['register_field'] ) );
+			if ( wp_verify_nonce( $register_nonce, 'register' ) ) {
 				if ( ! empty( $first_name ) && ! empty( $last_name ) && ! empty( $email ) && ! empty( $username ) && ! empty( $password ) && ! empty( $repeat_password ) ) {
 					if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
 						if ( stristr( $username, " " ) === false && stristr( $username, "." ) === false ) {

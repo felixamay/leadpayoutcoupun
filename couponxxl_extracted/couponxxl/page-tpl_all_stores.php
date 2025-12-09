@@ -12,11 +12,10 @@ $cur_page        = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $letter          = get_query_var( $couponxxl_slugs['letter'], '' );
 $stores_per_page = couponxxl_get_option( 'stores_per_page' );
 $this_permalink  = couponxxl_get_permalink_by_tpl( 'page-tpl_all_stores' );
-$keyword         = ! empty( $_GET[ $couponxxl_slugs['keyword'] ] ) ? urldecode( $_GET[ $couponxxl_slugs['keyword'] ] ) : '';
 
 $keyword = '';
 if ( isset( $_GET[ $couponxxl_slugs['keyword'] ] ) ) {
-	$keyword = urldecode( $_GET[ $couponxxl_slugs['keyword'] ] );
+	$keyword = sanitize_text_field( urldecode( wp_unslash( $_GET[ $couponxxl_slugs['keyword'] ] ) ) );
 }
 
 $args = array(

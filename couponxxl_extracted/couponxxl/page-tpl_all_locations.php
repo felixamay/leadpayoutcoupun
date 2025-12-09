@@ -7,7 +7,7 @@ the_post();
 get_template_part( 'includes/title' );
 
 global $couponxxl_slugs;
-$location_search = !empty( $_GET['location_search'] ) ? $_GET['location_search'] : '';
+$location_search = !empty( $_GET['location_search'] ) ? sanitize_text_field( wp_unslash( $_GET['location_search'] ) ) : '';
 $letter = get_query_var( $couponxxl_slugs['letter'], '' );
 
 $locations = couponxxl_get_organized( 'location' );

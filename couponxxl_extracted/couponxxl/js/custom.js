@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
 
       });
     } else {
-      $('ul.nav li.dropdown, ul.nav li.dropdown-submenu').unbind('mouseenter mouseleave');
+      $('ul.nav li.dropdown, ul.nav li.dropdown-submenu').off('mouseenter mouseleave');
     }
 
     if ($(window).width() >= 767) {
@@ -68,7 +68,7 @@ jQuery(document).ready(function ($) {
         $(this).removeClass('open').find(' > .mega_menu').stop(true, true).show().hide();
       });
     } else {
-      $('ul.nav li.mega_menu_li, ul.mega_menu').unbind('mouseenter mouseleave');
+      $('ul.nav li.mega_menu_li, ul.mega_menu').off('mouseenter mouseleave');
       $(document).on('click', 'ul.nav li.mega_menu_li', function () {
         $(this).find('.mega_menu').slideToggle();
       });

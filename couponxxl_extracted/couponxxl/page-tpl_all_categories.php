@@ -7,7 +7,7 @@ the_post();
 get_template_part( 'includes/title' );
 
 global $couponxxl_slugs;
-$category_search = !empty( $_GET['category_search'] ) ? $_GET['category_search'] : '';
+$category_search = !empty( $_GET['category_search'] ) ? sanitize_text_field( wp_unslash( $_GET['category_search'] ) ) : '';
 $letter = get_query_var( $couponxxl_slugs['letter'] );
 
 $offer_cats = couponxxl_get_organized( 'offer_cat' );
