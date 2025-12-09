@@ -1,19 +1,30 @@
-<div class="white-block buyer-block">
+<!-- Modern Buyer Welcome Section -->
+<div class="dashboard-welcome animate-fade-in-up" style="margin-bottom: 30px;">
+    <i class="fa fa-user-circle welcome-icon"></i>
+    <h2><?php esc_html_e( 'Welcome', 'couponxxl' ); ?>, <?php echo esc_html( $current_user->display_name ); ?>! 👋</h2>
+    <?php $purchases = couponxxl_user_purchases( get_current_user_id(), 'deals' ); ?>
+    <p><?php esc_html_e( 'You have purchased', 'couponxxl' ); ?> <strong><?php echo esc_html( $purchases ); ?></strong> <?php echo $purchases == 1 ? esc_html__( 'deal', 'couponxxl' ) : esc_html__( 'deals', 'couponxxl' ); ?>. <a href="<?php echo esc_url( add_query_arg( array( 'subpage' => 'purchases' ), $profile_link ) ); ?>" style="color: #fff; text-decoration: underline;"><?php esc_html_e( 'View purchases', 'couponxxl' ); ?></a></p>
+</div>
+
+<div class="white-block-modern buyer-block">
+    <div class="white-block-title">
+        <h4><i class="fa fa-user-edit"></i> <?php esc_html_e( 'Edit Profile', 'couponxxl' ); ?></h4>
+    </div>
     <div class="white-block-content">
-        <form method="post">
+        <form method="post" class="form-modern">
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="white-block-content">
-                        <div class="register-icon">
+                <div class="col-sm-4 col-md-3">
+                    <div class="profile-sidebar-modern" style="margin-bottom: 20px;">
+                        <div class="avatar-wrapper">
                             <a href="javascript:;" class="user-avatar<?php echo pbs_is_demo() ? 's' : ''; ?>">
-                                <?php echo get_avatar( $current_user->ID ); ?>
+                                <?php echo get_avatar( $current_user->ID, 120 ); ?>
                             </a>
+                            <div class="upload-overlay">
+                                <i class="fa fa-camera"></i>
+                            </div>
                         </div>
-                        <p>
-                            <?php
-                            $purchases = couponxxl_user_purchases( get_current_user_id(), 'deals' );
-                            esc_html_e( 'Hi ', 'couponxxl' ); echo esc_html( $current_user->display_name ); ?>, <?php esc_html_e( 'you have purchased ', 'couponxxl' ); ?><strong><?php echo wp_kses_post( $purchases ); ?></strong> <?php $purchases == 1 ? esc_html_e( ' deal', 'couponxxl' ) : esc_html_e( ' deals', 'couponxxl' ) ?>, <a href="<?php echo esc_url( add_query_arg( array( 'subpage' => 'purchases' ), $profile_link ) ) ?>"><?php esc_html_e( ' see purchases', 'couponxxl' ) ?></a>
-                        </p>
+                        <div class="user-name"><?php echo esc_html( $current_user->display_name ); ?></div>
+                        <div class="user-role"><i class="fa fa-check-circle" style="color: #10b981;"></i> <?php esc_html_e( 'Verified Buyer', 'couponxxl' ); ?></div>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -53,11 +64,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-sm-12">
                             <?php wp_nonce_field('update_profile','update_profile_field'); ?>
-                            <a href="javascript:;" class="btn register-form <?php echo pbs_is_demo() ? '' : esc_attr( 'submit-form' ); ?>"><?php esc_html_e( 'Save Profile', 'couponxxl' ); ?></a>
-                            <div class="ajax-response"></div>
+                            <a href="javascript:;" class="btn btn-modern btn-modern-primary register-form <?php echo pbs_is_demo() ? '' : esc_attr( 'submit-form' ); ?>">
+                                <i class="fa fa-save"></i> <?php esc_html_e( 'Save Profile', 'couponxxl' ); ?>
+                            </a>
+                            <div class="ajax-response" style="margin-top: 15px;"></div>
                             <input type="hidden" value="update_profile" name="action">
                         </div>
                     </div>

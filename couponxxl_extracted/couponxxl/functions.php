@@ -1002,6 +1002,8 @@ if ( ! function_exists( 'couponxxl_scripts_styles' ) ) {
 		/* ENQUEUE STYLES */
 		wp_enqueue_style( 'couponxxl-pline', get_template_directory_uri() . '/css/pline.css' );
 		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
+		/* Font Awesome 5 Free for modern icons */
+		wp_enqueue_style( 'font-awesome-5', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
 		wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/css/magnific-popup.css' );
 		/* BOOTSTRAP */
 		wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css' );
@@ -1010,6 +1012,8 @@ if ( ! function_exists( 'couponxxl_scripts_styles' ) ) {
 			wp_enqueue_style( 'bootstrap-table', get_template_directory_uri() . '/css/bootstrap-table.min.css' );
 			/* DATE TIME PICKER */
 			wp_enqueue_style( 'datetimepicker', get_template_directory_uri() . '/css/jquery.datetimepicker.css' );
+			/* MODERN DASHBOARD STYLES */
+			wp_enqueue_style( 'couponxxl-dashboard-modern', get_template_directory_uri() . '/css/dashboard-modern.css', array(), '1.0.0' );
 		}
 
 		$theme_font = couponxxl_get_option( 'theme_font' );
