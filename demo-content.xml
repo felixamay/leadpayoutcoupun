@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- WordPress eXtended RSS Demo Content for CouponXXL Theme -->
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+
+<channel>
+	<title>CouponXXL Demo Content</title>
+	<link>http://yourdomain.com</link>
+	<description>Demo content for CouponXXL Theme</description>
+	<pubDate>Mon, 09 Dec 2024 00:00:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>http://yourdomain.com</wp:base_site_url>
+	<wp:base_blog_url>http://yourdomain.com</wp:base_blog_url>
+
+	<!-- Categories for Offers -->
+	<wp:term>
+		<wp:term_id>1</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>electronics</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Electronics]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>2</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>fashion</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Fashion]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>3</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>food-dining</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Food & Dining]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>4</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>travel</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Travel]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>5</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>health-beauty</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Health & Beauty]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>6</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>home-garden</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Home & Garden]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>7</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>sports-outdoors</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Sports & Outdoors]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>8</wp:term_id>
+		<wp:term_taxonomy>offer_cat</wp:term_taxonomy>
+		<wp:term_slug>entertainment</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Entertainment]]></wp:term_name>
+	</wp:term>
+
+	<!-- Location Terms -->
+	<wp:term>
+		<wp:term_id>50</wp:term_id>
+		<wp:term_taxonomy>offer_location</wp:term_taxonomy>
+		<wp:term_slug>new-york</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[New York]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>51</wp:term_id>
+		<wp:term_taxonomy>offer_location</wp:term_taxonomy>
+		<wp:term_slug>los-angeles</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Los Angeles]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>52</wp:term_id>
+		<wp:term_taxonomy>offer_location</wp:term_taxonomy>
+		<wp:term_slug>chicago</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Chicago]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>53</wp:term_id>
+		<wp:term_taxonomy>offer_location</wp:term_taxonomy>
+		<wp:term_slug>online</wp:term_slug>
+		<wp:term_parent></wp:term_parent>
+		<wp:term_name><![CDATA[Online]]></wp:term_name>
+	</wp:term>
+
+	<!-- ==================== STORES ==================== -->
+	
+	<!-- Store 1: TechMart -->
+	<item>
+		<title>TechMart</title>
+		<link>http://yourdomain.com/store/techmart/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=101</guid>
+		<description></description>
+		<content:encoded><![CDATA[TechMart is your one-stop destination for the latest electronics, gadgets, and tech accessories. We offer competitive prices on smartphones, laptops, tablets, and smart home devices. Shop with confidence with our 30-day return policy and expert customer support.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Your one-stop destination for electronics and gadgets.]]></excerpt:encoded>
+		<wp:post_id>101</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>techmart</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.techmart-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>store_facebook</wp:meta_key>
+			<wp:meta_value><![CDATA[https://facebook.com/techmart]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>store_twitter</wp:meta_key>
+			<wp:meta_value><![CDATA[https://twitter.com/techmart]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 2: FashionHub -->
+	<item>
+		<title>FashionHub</title>
+		<link>http://yourdomain.com/store/fashionhub/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=102</guid>
+		<description></description>
+		<content:encoded><![CDATA[FashionHub brings you the latest trends in clothing, shoes, and accessories for men, women, and kids. From casual wear to formal attire, we have styles for every occasion. Enjoy free shipping on orders over $50 and easy returns within 60 days.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Latest trends in clothing and accessories.]]></excerpt:encoded>
+		<wp:post_id>102</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>fashionhub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.fashionhub-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>store_facebook</wp:meta_key>
+			<wp:meta_value><![CDATA[https://facebook.com/fashionhub]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 3: GourmetBites -->
+	<item>
+		<title>GourmetBites</title>
+		<link>http://yourdomain.com/store/gourmetbites/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=103</guid>
+		<description></description>
+		<content:encoded><![CDATA[GourmetBites offers premium food delivery and restaurant deals in your area. From fine dining to casual eats, discover amazing discounts on your favorite cuisines. Order now and satisfy your cravings with exclusive savings.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Premium food delivery and restaurant deals.]]></excerpt:encoded>
+		<wp:post_id>103</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>gourmetbites</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.gourmetbites-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 4: TravelEscape -->
+	<item>
+		<title>TravelEscape</title>
+		<link>http://yourdomain.com/store/travelescape/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=104</guid>
+		<description></description>
+		<content:encoded><![CDATA[TravelEscape is your gateway to amazing vacation deals, flight discounts, and hotel savings. Whether you're planning a weekend getaway or an international adventure, we help you travel more for less. Book now and start exploring!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Amazing vacation deals and travel savings.]]></excerpt:encoded>
+		<wp:post_id>104</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>travelescape</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.travelescape-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 5: BeautyGlow -->
+	<item>
+		<title>BeautyGlow</title>
+		<link>http://yourdomain.com/store/beautyglow/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=105</guid>
+		<description></description>
+		<content:encoded><![CDATA[BeautyGlow offers premium skincare, makeup, and wellness products from top brands. Discover your perfect beauty routine with our curated selection of products. Enjoy exclusive discounts and free samples with every order.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Premium skincare and beauty products.]]></excerpt:encoded>
+		<wp:post_id>105</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>beautyglow</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.beautyglow-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 6: HomeNest -->
+	<item>
+		<title>HomeNest</title>
+		<link>http://yourdomain.com/store/homenest/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=106</guid>
+		<description></description>
+		<content:encoded><![CDATA[HomeNest brings you quality furniture, home decor, and garden essentials at unbeatable prices. Transform your living space with our stylish and affordable products. Free delivery on orders over $100.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Quality furniture and home decor.]]></excerpt:encoded>
+		<wp:post_id>106</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>homenest</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.homenest-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 7: SportsPro -->
+	<item>
+		<title>SportsPro</title>
+		<link>http://yourdomain.com/store/sportspro/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=107</guid>
+		<description></description>
+		<content:encoded><![CDATA[SportsPro is your ultimate destination for sports equipment, athletic wear, and outdoor gear. From running shoes to camping equipment, we have everything you need for an active lifestyle. Shop now and gear up for your next adventure!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Sports equipment and outdoor gear.]]></excerpt:encoded>
+		<wp:post_id>107</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>sportspro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.sportspro-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Store 8: MovieMax -->
+	<item>
+		<title>MovieMax</title>
+		<link>http://yourdomain.com/store/moviemax/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=store&amp;p=108</guid>
+		<description></description>
+		<content:encoded><![CDATA[MovieMax brings you the best deals on movie tickets, streaming subscriptions, and entertainment experiences. Enjoy exclusive discounts on the latest blockbusters, concerts, and events. Your entertainment journey starts here!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Movie tickets and entertainment deals.]]></excerpt:encoded>
+		<wp:post_id>108</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>moviemax</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>store</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>store_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.moviemax-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ==================== COUPONS (Code Type) ==================== -->
+
+	<!-- Coupon 1: TechMart 20% Off -->
+	<item>
+		<title>20% Off All Electronics at TechMart</title>
+		<link>http://yourdomain.com/offer/20-off-all-electronics-techmart/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=201</guid>
+		<description></description>
+		<content:encoded><![CDATA[Save 20% on all electronics at TechMart! This exclusive coupon code applies to smartphones, laptops, tablets, and accessories. Don't miss this amazing opportunity to upgrade your tech at a fraction of the price. Valid on orders over $50. Cannot be combined with other offers.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Get 20% off on all electronics including smartphones, laptops, and tablets.]]></excerpt:encoded>
+		<wp:post_id>201</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>20-off-all-electronics-techmart</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="electronics"><![CDATA[Electronics]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[101]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[TECH20OFF]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.techmart-demo.com/checkout]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 2: FashionHub 30% Off -->
+	<item>
+		<title>30% Off Winter Collection at FashionHub</title>
+		<link>http://yourdomain.com/offer/30-off-winter-collection-fashionhub/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=202</guid>
+		<description></description>
+		<content:encoded><![CDATA[Stay warm and stylish with 30% off the entire winter collection at FashionHub! This coupon applies to coats, sweaters, boots, and winter accessories. Use code at checkout to save big on the season's hottest styles.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Save 30% on coats, sweaters, boots and winter accessories.]]></excerpt:encoded>
+		<wp:post_id>202</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>30-off-winter-collection-fashionhub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="fashion"><![CDATA[Fashion]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[102]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[WINTER30]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.fashionhub-demo.com/checkout]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 3: GourmetBites $15 Off -->
+	<item>
+		<title>$15 Off Your First Order at GourmetBites</title>
+		<link>http://yourdomain.com/offer/15-off-first-order-gourmetbites/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=203</guid>
+		<description></description>
+		<content:encoded><![CDATA[New to GourmetBites? Get $15 off your first food delivery order! Choose from hundreds of restaurants and cuisines. Minimum order of $30 required. Available for new customers only.]]></content:encoded>
+		<excerpt:encoded><![CDATA[New customers get $15 off their first food delivery order.]]></excerpt:encoded>
+		<wp:post_id>203</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>15-off-first-order-gourmetbites</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="food-dining"><![CDATA[Food & Dining]]></category>
+		<category domain="offer_location" nicename="new-york"><![CDATA[New York]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[103]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[WELCOME15]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.gourmetbites-demo.com/order]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 4: TravelEscape $100 Off -->
+	<item>
+		<title>$100 Off Flight Bookings at TravelEscape</title>
+		<link>http://yourdomain.com/offer/100-off-flights-travelescape/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=204</guid>
+		<description></description>
+		<content:encoded><![CDATA[Plan your next vacation and save $100 on flight bookings at TravelEscape! Valid on domestic and international flights with a minimum booking of $500. Book now and explore the world for less!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Save $100 on domestic and international flight bookings.]]></excerpt:encoded>
+		<wp:post_id>204</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>100-off-flights-travelescape</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="travel"><![CDATA[Travel]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[104]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[FLY100]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.travelescape-demo.com/flights]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 5: BeautyGlow 25% Off -->
+	<item>
+		<title>25% Off Skincare Products at BeautyGlow</title>
+		<link>http://yourdomain.com/offer/25-off-skincare-beautyglow/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=205</guid>
+		<description></description>
+		<content:encoded><![CDATA[Treat your skin with 25% off all skincare products at BeautyGlow! From cleansers to serums, moisturizers to masks, refresh your beauty routine and save. Plus, get free samples with every order!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Save 25% on cleansers, serums, moisturizers and more.]]></excerpt:encoded>
+		<wp:post_id>205</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>25-off-skincare-beautyglow</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="health-beauty"><![CDATA[Health & Beauty]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[105]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[SKIN25]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.beautyglow-demo.com/skincare]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 6: HomeNest Free Shipping -->
+	<item>
+		<title>Free Shipping on All Orders at HomeNest</title>
+		<link>http://yourdomain.com/offer/free-shipping-homenest/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=206</guid>
+		<description></description>
+		<content:encoded><![CDATA[Get free shipping on all orders at HomeNest, no minimum required! Whether you're buying a small decor item or a large piece of furniture, enjoy complimentary delivery to your doorstep.]]></content:encoded>
+		<excerpt:encoded><![CDATA[Free shipping on all orders with no minimum purchase required.]]></excerpt:encoded>
+		<wp:post_id>206</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>free-shipping-homenest</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="home-garden"><![CDATA[Home & Garden]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[106]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[FREESHIP]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.homenest-demo.com]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 7: SportsPro BOGO -->
+	<item>
+		<title>Buy One Get One 50% Off at SportsPro</title>
+		<link>http://yourdomain.com/offer/bogo-50-sportspro/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=207</guid>
+		<description></description>
+		<content:encoded><![CDATA[Buy one, get one 50% off on all athletic shoes at SportsPro! Stock up on running shoes, basketball sneakers, and training footwear. The perfect opportunity to gear up for your fitness goals!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Buy one pair of athletic shoes and get the second at 50% off.]]></excerpt:encoded>
+		<wp:post_id>207</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>bogo-50-sportspro</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="sports-outdoors"><![CDATA[Sports & Outdoors]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[107]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[BOGO50]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.sportspro-demo.com/shoes]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 8: MovieMax $5 Off -->
+	<item>
+		<title>$5 Off Any Movie Ticket at MovieMax</title>
+		<link>http://yourdomain.com/offer/5-off-movie-ticket-moviemax/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=208</guid>
+		<description></description>
+		<content:encoded><![CDATA[Enjoy $5 off any movie ticket at MovieMax! Valid for all showtimes including premium formats like IMAX and 3D. Catch the latest blockbusters and save on your movie night out!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Get $5 off any movie ticket including IMAX and 3D showings.]]></excerpt:encoded>
+		<wp:post_id>208</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>5-off-movie-ticket-moviemax</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="entertainment"><![CDATA[Entertainment]]></category>
+		<category domain="offer_location" nicename="los-angeles"><![CDATA[Los Angeles]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[108]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[code]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_code</wp:meta_key>
+			<wp:meta_value><![CDATA[MOVIE5]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_link</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.moviemax-demo.com/tickets]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ==================== COUPONS (Sale Type - No Code Required) ==================== -->
+
+	<!-- Coupon 9: TechMart Sale -->
+	<item>
+		<title>Up to 40% Off Laptops - Limited Time Sale</title>
+		<link>http://yourdomain.com/offer/40-off-laptops-sale-techmart/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=209</guid>
+		<description></description>
+		<content:encoded><![CDATA[Huge laptop sale at TechMart! Save up to 40% on select laptops from top brands including Dell, HP, Lenovo, and Apple. No coupon code needed - prices automatically reduced at checkout. Hurry, while supplies last!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Save up to 40% on laptops from Dell, HP, Lenovo and Apple.]]></excerpt:encoded>
+		<wp:post_id>209</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>40-off-laptops-sale-techmart</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="electronics"><![CDATA[Electronics]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[101]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[sale]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_sale</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.techmart-demo.com/laptops-sale]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 10: FashionHub Sale -->
+	<item>
+		<title>Clearance Sale - Up to 70% Off at FashionHub</title>
+		<link>http://yourdomain.com/offer/clearance-70-off-fashionhub/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=210</guid>
+		<description></description>
+		<content:encoded><![CDATA[Massive clearance sale at FashionHub! Save up to 70% on last season's styles. Shop dresses, tops, pants, and accessories at incredible prices. No code required - click through to shop the sale!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Up to 70% off on clearance items - dresses, tops, pants and more.]]></excerpt:encoded>
+		<wp:post_id>210</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>clearance-70-off-fashionhub</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="fashion"><![CDATA[Fashion]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[102]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[sale]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_sale</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.fashionhub-demo.com/clearance]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 11: Holiday Sale -->
+	<item>
+		<title>Holiday Special: 50% Off Hotel Bookings</title>
+		<link>http://yourdomain.com/offer/holiday-50-off-hotels-travelescape/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=211</guid>
+		<description></description>
+		<content:encoded><![CDATA[Plan your holiday getaway and save 50% on hotel bookings at TravelEscape! Choose from thousands of hotels worldwide. This exclusive sale includes 4 and 5-star properties. Book now for travel through March!]]></content:encoded>
+		<excerpt:encoded><![CDATA[Save 50% on hotel bookings including 4 and 5-star properties.]]></excerpt:encoded>
+		<wp:post_id>211</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>holiday-50-off-hotels-travelescape</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="travel"><![CDATA[Travel]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[104]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[sale]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_sale</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.travelescape-demo.com/holiday-sale]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Coupon 12: BeautyGlow Sale -->
+	<item>
+		<title>Flash Sale: 60% Off Makeup at BeautyGlow</title>
+		<link>http://yourdomain.com/offer/flash-sale-60-off-makeup-beautyglow/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?post_type=offer&amp;p=212</guid>
+		<description></description>
+		<content:encoded><![CDATA[48-hour flash sale at BeautyGlow! Get 60% off all makeup products including lipsticks, foundations, eyeshadow palettes, and more. Shop top brands at unbeatable prices. No code needed!]]></content:encoded>
+		<excerpt:encoded><![CDATA[60% off all makeup - lipsticks, foundations, eyeshadow palettes and more.]]></excerpt:encoded>
+		<wp:post_id>212</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>open</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>flash-sale-60-off-makeup-beautyglow</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>offer</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="offer_cat" nicename="health-beauty"><![CDATA[Health & Beauty]]></category>
+		<category domain="offer_location" nicename="online"><![CDATA[Online]]></category>
+		<wp:postmeta>
+			<wp:meta_key>offer_store</wp:meta_key>
+			<wp:meta_value><![CDATA[105]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_type</wp:meta_key>
+			<wp:meta_value><![CDATA[sale]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>coupon_sale</wp:meta_key>
+			<wp:meta_value><![CDATA[https://www.beautyglow-demo.com/flash-sale]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- ==================== PAGES ==================== -->
+
+	<!-- Home Page -->
+	<item>
+		<title>Home</title>
+		<link>http://yourdomain.com/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=2</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>2</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>home</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_home_page.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- All Coupons Page -->
+	<item>
+		<title>Coupons</title>
+		<link>http://yourdomain.com/coupons/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=3</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>3</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>coupons</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_search.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- All Stores Page -->
+	<item>
+		<title>Stores</title>
+		<link>http://yourdomain.com/stores/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=4</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>4</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>stores</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_all_stores.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Categories Page -->
+	<item>
+		<title>Categories</title>
+		<link>http://yourdomain.com/categories/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=5</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>5</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>categories</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_all_categories.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Contact Page -->
+	<item>
+		<title>Contact Us</title>
+		<link>http://yourdomain.com/contact/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=6</guid>
+		<description></description>
+		<content:encoded><![CDATA[Have questions or feedback? We'd love to hear from you! Fill out the form below and our team will get back to you within 24 hours.]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>6</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>contact</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_contact.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Profile/Dashboard Page -->
+	<item>
+		<title>My Account</title>
+		<link>http://yourdomain.com/my-account/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=7</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>7</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>my-account</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_profile.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Register Page -->
+	<item>
+		<title>Register</title>
+		<link>http://yourdomain.com/register/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=8</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>8</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>register</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_register.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Cart Page -->
+	<item>
+		<title>Cart</title>
+		<link>http://yourdomain.com/cart/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=9</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>9</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>cart</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_cart.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+	<!-- Checkout Page -->
+	<item>
+		<title>Checkout</title>
+		<link>http://yourdomain.com/checkout/</link>
+		<pubDate>Mon, 01 Dec 2024 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">http://yourdomain.com/?page_id=10</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>10</wp:post_id>
+		<wp:post_date>2024-12-01 10:00:00</wp:post_date>
+		<wp:post_date_gmt>2024-12-01 10:00:00</wp:post_date_gmt>
+		<wp:post_modified>2024-12-01 10:00:00</wp:post_modified>
+		<wp:post_modified_gmt>2024-12-01 10:00:00</wp:post_modified_gmt>
+		<wp:comment_status>closed</wp:comment_status>
+		<wp:ping_status>closed</wp:ping_status>
+		<wp:post_name>checkout</wp:post_name>
+		<wp:status>publish</wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type>page</wp:post_type>
+		<wp:post_password></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<wp:postmeta>
+			<wp:meta_key>_wp_page_template</wp:meta_key>
+			<wp:meta_value><![CDATA[page-tpl_checkout.php]]></wp:meta_value>
+		</wp:postmeta>
+	</item>
+
+</channel>
+</rss>
